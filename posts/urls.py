@@ -1,9 +1,17 @@
 from django.urls import path
-from . import views
+from .views import PostViewSet, register, login_view
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'posts', PostViewSet, basename='post')
+# router.register(r'comments', CommentViewSet, basename='comments')
+
+
 
 urlpatterns = [
-    path('posts/', views.postView, name='post'),
-    path('posts/<int:pk>/', views.postDetail, name='post_detail'),
-    path('posts/<int:pk>/comments/', views.postComments, name='post_comments')
+    path('auth/register/', register, name='api-register'),
+    path('auth/login/', login_view, name='api-login'),
     
-]
+    # path('posts/<int:pk>/comments', post_detail, name='post-detail')
+
+ ] + router.urls

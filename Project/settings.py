@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-sg#2&cna=uh=8bfoijt@99kfm!cboashd#oyawb=+6-++uvg3c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mgrestoo.pythonanywhere.com','localhost','127.0.0.1']
+# ALLOWED_HOSTS = ['']
+
 
 
 # Application definition
@@ -109,17 +111,18 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 2,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
+    
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '20/minute',
-        'user': '1000/minute',
+        'anon': '3/minute',
+        'user': '10/minute',
     },
 }
 
@@ -140,3 +143,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
